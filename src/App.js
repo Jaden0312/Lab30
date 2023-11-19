@@ -37,9 +37,11 @@ class App extends React.Component {
     console.log(this.state);
   }
 
-  handleChange = (event) => {
-    const filteredProduct = this.state.name.filter((name) => {
-      return this.state.name.includes(event.target.value);
+  
+  render() {
+  const handleChange = (event) => {
+    const filteredProduct = this.state.filter((item) => {
+      return item.name.includes(event.target.value);
     });
 
     this.setState((state) => {
@@ -48,21 +50,20 @@ class App extends React.Component {
       }
     })
   }
-
-render() {
   return (
     <>
       <div className="container">
         <div className="search-container">
-          <input id="searchInput" type="text" placeholder="Write product Name" onChange={this.handleChange}></input>
+          <input id="searchInput" type="text" placeholder="Write product Name" onChange={handleChange} />
         </div>
         <div className="product">
           <h1>Products</h1>
           <hr />
           <div className="product-item">
-            {this.state.map((item, index) => {
-              return <Items key={index} id={item.id} name={item.name} image={item.image} new_price={item.new_price} />
+            {this.state.map((item) => {
+              return <Items key={item.id} id={item.id} name={item.name} image={item.image} new_price={item.new_price} />
             })}
+            {console.log(this.state)}
           </div>
         </div>
       </div>
